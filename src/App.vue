@@ -9,7 +9,8 @@
           v-for="card in cards"
           :key="card.id"
           :post="card.data"
-          @visit="(post)=>onVisitPost(post)"
+          @visit="onVisitPost"
+          @dismiss="onDismissPost"
           :visited="isVisited"
       />
       </div>
@@ -46,6 +47,9 @@ export default {
     isVisited(postId) {
       const visited = this.$store.getters.getVisited;
       return visited.includes(postId);
+    },
+    onDismissPost(post) {
+      this.$store.dispatch('dismissPost', post);
     },
     onVisitPost(post) {
       this.$store.dispatch('visitPost', post);

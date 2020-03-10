@@ -16,22 +16,34 @@ export default new Vuex.Store({
     getPost: (state) => state.post,
     getPosts: (state) => state.posts,
     getVisited: (state) => state.visited,
+    getDismissed: (state) => state.dismissed,
   },
   mutations: {
     SET_POST: (state, post) => state.post = post,
     SET_POSTS: (state, posts) => Vue.set(state, 'posts', posts),
     ADD_VISITED: (state, id) => state.visited.push(id),
+    ADD_DISMISSED: (state, id) => state.dismissed.push(id),
   },
   actions: {
     async fetchPosts({ commit }) {
       const posts = await api.fetchPosts();
       commit('SET_POSTS', posts);
     },
-    async visitPost({ state, commit }, post) {
+    visitPost({ state, commit }, post) {
       const isVisitedPost = state.visited.find((x) => x === post.id);
-      await commit('SET_POST', post);
+      commit('SET_POST', post);
       if (!isVisitedPost) {
-        await commit('ADD_VISITED', post.id);
+        commit('ADD_VISITED', post.id);
+      }
+    },
+    dismissPost({ state, commit }, post) {
+      const isDismissed = state.dismissed.find((x) => x === post.id);
+      if (!isDismissed) {
+        commit('ADD_DISMISSED', post.id);
+        const dismissedIndex = state.posts.findIndex(({ data }) => data.id === post.id);
+        if (dismissedIndex > -1) {
+          state.posts.splice(dismissedIndex, 1);
+        }
       }
     },
   },

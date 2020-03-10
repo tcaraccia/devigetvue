@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto" outlined @click.native="$emit('visit', post)">
+  <v-card class="mx-auto" outlined>
     <v-card-subtitle>
       <v-row class="text-left ma-0 pa-0" no-gutters>
         <v-col cols="1">
@@ -18,7 +18,7 @@
         </v-col>
       </v-row>
     </v-card-subtitle>
-    <v-card-text>
+    <v-card-text @click="$emit('visit', post)">
       <v-row>
         <v-col cols="4" v-show="post.thumbnail">
           <v-img :src="post.thumbnail" height="75" width="75"> </v-img>
@@ -31,7 +31,7 @@
     <v-card-actions>
       <v-row align="center">
         <v-col cols="1">
-          <v-btn icon color="red">
+          <v-btn icon color="red" @click.native="$emit('dismiss', post)">
             <v-icon color="red">mdi-close-circle-outline</v-icon>
           </v-btn>
         </v-col>
