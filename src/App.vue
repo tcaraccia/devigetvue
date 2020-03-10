@@ -10,6 +10,7 @@
           :key="card.id"
           :post="card.data"
           @visit="(post)=>onVisitPost(post)"
+          :visited="isVisited"
       />
       </div>
     </v-navigation-drawer>
@@ -42,6 +43,10 @@ export default {
     this.$store.dispatch('fetchPosts');
   },
   methods: {
+    isVisited(postId) {
+      const visited = this.$store.getters.getVisited;
+      return visited.includes(postId);
+    },
     onVisitPost(post) {
       this.$store.dispatch('visitPost', post);
     },

@@ -15,6 +15,7 @@ export default new Vuex.Store({
   getters: {
     getPost: (state) => state.post,
     getPosts: (state) => state.posts,
+    getVisited: (state) => state.visited,
   },
   mutations: {
     SET_POST: (state, post) => state.post = post,
@@ -24,7 +25,6 @@ export default new Vuex.Store({
   actions: {
     async fetchPosts({ commit }) {
       const posts = await api.fetchPosts();
-      debugger;
       commit('SET_POSTS', posts);
     },
     async visitPost({ state, commit }, post) {

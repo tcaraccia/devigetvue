@@ -3,7 +3,6 @@ const fetchPosts = async (count) => {
   let posts = [];
   try {
     const res = await fetch(url(count));
-    debugger;
     if (res.status === 200) {
       const jsonRes = await res.json();
       posts = jsonRes.data.children;

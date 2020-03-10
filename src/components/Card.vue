@@ -3,7 +3,12 @@
     <v-card-subtitle>
       <v-row class="text-left ma-0 pa-0" no-gutters>
         <v-col cols="1">
-          <v-icon color="primary" size="15">mdi-circle</v-icon>
+          <v-icon
+            :color="visited(post.id) ? 'white' : 'primary'"
+            size="15"
+           >
+           {{visited(post.id) ? 'mdi-circle-outline' : 'mdi-circle'}}
+          </v-icon>
         </v-col>
         <v-col>
           {{ post.author }}
@@ -15,7 +20,7 @@
     </v-card-subtitle>
     <v-card-text>
       <v-row>
-        <v-col cols="4">
+        <v-col cols="4" v-show="post.thumbnail">
           <v-img :src="post.thumbnail" height="75" width="75"> </v-img>
         </v-col>
         <v-col cols="8" class="justify-text">
@@ -47,6 +52,11 @@
 export default {
   name: 'ReditCard',
   props: {
+    visited: {
+      type: Function,
+      required: true,
+      default: () => ({}),
+    },
     post: {
       type: Object,
       required: true,
