@@ -14,7 +14,7 @@
           {{ post.author }}
         </v-col>
         <v-col class="text-right">
-          {{ new Date(post.created) | moment("from", "now") }}
+          {{ $moment.unix(post.created_utc) | moment("from", "now") }}
         </v-col>
       </v-row>
     </v-card-subtitle>
