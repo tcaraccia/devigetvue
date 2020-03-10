@@ -37,9 +37,10 @@ export default new Vuex.Store({
     ADD_DISMISSED: (state, id) => state.dismissed.push(id),
   },
   actions: {
-    async fetchPosts({ commit }) {
+    async fetchPosts({ state, commit }) {
       const posts = await api.fetchPosts();
-      commit('SET_POSTS', posts);
+      const unDissmisedPosts = posts.filter((post) => !state.dismissed.includes(post.data.id));
+      commit('SET_POSTS', unDissmisedPosts);
     },
     visitPost({ state, commit }, post) {
       const isVisitedPost = state.visited.find((x) => x === post.id);
