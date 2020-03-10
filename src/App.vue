@@ -5,7 +5,7 @@
       <div class="white--text mx-auto">Reddit Posts</div>
       </v-app-bar>
 
-      <div class="mt-12">
+      <div class="mt-12" id="cardcontainer">
         <card
           v-for="card in cards"
           :key="card.id"
@@ -15,6 +15,9 @@
           :visited="isVisited"
       />
       </div>
+      <v-toolbar bottom absolute width="100%">
+        <v-btn block width="100%" @click="onDismissAll">Dismiss all</v-btn>
+      </v-toolbar>
     </v-navigation-drawer>
     <v-content>
       <router-view/>
@@ -52,22 +55,12 @@ export default {
     onDismissPost(post) {
       this.$store.dispatch('dismissPost', post);
     },
+    onDismissAll() {
+      this.$store.dispatch('dismissAll');
+    },
     onVisitPost(post) {
       this.$store.dispatch('visitPost', post);
     },
   },
 };
 </script>
-<style>
-.slide-fade-enter-active {
-  transition: all .3s ease;
-}
-.slide-fade-leave-active {
-  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-}
-.slide-fade-enter, .slide-fade-leave-to
-/* .slide-fade-leave-active below version 2.1.8 */ {
-  transform: translateX(350px);
-  opacity: 0;
-}
-</style>
