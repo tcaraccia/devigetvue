@@ -1,5 +1,5 @@
 # devigetvuejs
-
+https://devigetvuejs.teetime.now.sh
 ## Project setup
 ```
 yarn install
@@ -19,6 +19,9 @@ yarn build
 ```
 yarn lint
 ```
-
+## Deploy to Staging
+```
+now
+```
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
