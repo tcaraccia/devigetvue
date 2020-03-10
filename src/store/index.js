@@ -1,7 +1,19 @@
 /* eslint-disable no-return-assign */
 import Vue from 'vue';
 import Vuex from 'vuex';
+import VuexPersist from 'vuex-persist';
+
 import api from '@/api/reddit';
+
+const vuexPersist = new VuexPersist({
+  key: 'dvgvue',
+  storage: window.localStorage,
+  reducer: (state) => ({
+    visited: state.visited,
+    dismissed: state.dismissed,
+  }),
+
+});
 
 Vue.use(Vuex);
 
@@ -47,5 +59,5 @@ export default new Vuex.Store({
       }
     },
   },
-
+  plugins: [vuexPersist.plugin],
 });
