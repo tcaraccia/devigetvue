@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto" outlined>
+  <v-card class="mx-auto" outlined @click.native="$emit('visit', post)">
     <v-card-subtitle>
       <v-row class="text-left ma-0 pa-0" no-gutters>
         <v-col cols="1">
@@ -26,13 +26,17 @@
     <v-card-actions>
       <v-row align="center">
         <v-col cols="1">
-          <v-btn icon><v-icon>mdi-close-circle-outline </v-icon> </v-btn>
-        </v-col>
-        <v-col>
-          Dismiss Post
+          <v-btn icon color="red">
+            <v-icon color="red">mdi-close-circle-outline</v-icon>
+          </v-btn>
         </v-col>
         <v-col cols="6">
-          <div>{{ post.num_comments }} Comments</div>
+          <div class="ml-2">
+            Dismiss Post
+          </div>
+        </v-col>
+        <v-col cols="5" class="text-right">
+          <div class="orange--text">{{ post.num_comments }} Comments</div>
         </v-col>
       </v-row>
     </v-card-actions>
@@ -51,12 +55,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.truncated {
-  overflow: hidden;
-  display: block;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-</style>
