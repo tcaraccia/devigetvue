@@ -20,7 +20,6 @@
 </template>
 
 <script>
-import Api from '@/api/reddit';
 import Card from '@/components/Card.vue';
 
 export default {
@@ -29,13 +28,18 @@ export default {
     Card,
   },
   data: () => ({
-    cards: Api.data.children,
     drawer: true,
   }),
   computed: {
+    cards() {
+      return this.$store.getters.getPosts;
+    },
     selected() {
       return this.$store.getters.getPost;
     },
+  },
+  mounted() {
+    this.$store.dispatch('fetchPosts');
   },
   methods: {
     onVisitPost(post) {
