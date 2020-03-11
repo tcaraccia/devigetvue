@@ -66,7 +66,6 @@ export default new Vuex.Store({
       const unDissmisedPosts = state.posts.filter(
         (post) => !state.dismissed.includes(post.data.id),
       ).map((post) => post.data.id);
-      debugger;
       commit('ADD_ALL_DISMISSED', unDissmisedPosts);
       commit('REMOVE_ALL_POSTS');
     },
